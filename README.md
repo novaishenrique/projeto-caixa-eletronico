@@ -1,78 +1,161 @@
-# Caixa-Eletr-nico-C
-# Caixa eletronico - Atividade 2
+<div align="center">
 
-Projeto introdutorio em C, seguindo o roteiro escolhido da atividade.
-Saldo inicial: R$600,00. O programa permite corrigir entradas invalidas,
-realizar varios saques e consultar o saldo durante o mesmo atendimento.
-Cada saque aprovado desconta do saldo disponivel.
+# 🏧 Caixa Eletrônico em C
+
+### Atividade 2 · Projeto introdutório em C
+
+![C](https://img.shields.io/badge/C11-A8B9CC?style=for-the-badge&logo=c&logoColor=white)
+![GCC](https://img.shields.io/badge/GCC-compilador-333333?style=for-the-badge)
+![Portugol](https://img.shields.io/badge/Portugol-WebStudio-2E7D32?style=for-the-badge)
+
+</div>
+
+---
+
+## Sumário
+
+- [Sobre o projeto](#sobre-o-projeto)
+- [Como funciona](#como-funciona)
+- [Arquivos](#arquivos)
+- [Compilar e executar](#compilar-e-executar)
+- [Validação e cálculo](#validação-e-cálculo)
+- [Detalhes de implementação](#detalhes-de-implementação)
+- [Testes](#testes)
+- [Entrega](#entrega)
+
+---
+
+## Sobre o projeto
+
+Projeto introdutório em C, seguindo o roteiro escolhido da atividade.
+
+- 💰 **Saldo inicial:** R$ 600,00
+- 🔁 Permite corrigir entradas inválidas, realizar vários saques e consultar o saldo durante o mesmo atendimento.
+- ➖ Cada saque aprovado desconta do saldo disponível.
+- 💵 O valor sacado é entregue em notas de **100, 50, 20, 10, 5 e 2** e moedas de **1**.
+
+---
+
+## Como funciona
+
+```mermaid
+flowchart TD
+    A(["Início · saldo R$ 600,00"]) --> B["Ler valor do saque"]
+    B --> C{"Valor válido?"}
+    C -->|"Não: entrada inválida, zero, negativo ou acima do saldo"| B
+    C -->|"Sim"| D["Desconta do saldo e entrega notas e moedas"]
+    D --> E["Mostra o saldo atualizado"]
+    E --> M{"Menu"}
+    M -->|"1 · Consultar saldo"| F["Mostra o saldo"]
+    F --> M
+    M -->|"2 · Novo saque"| G{"Saldo maior que zero?"}
+    G -->|"Sim"| B
+    G -->|"Não"| H["Saldo insuficiente"]
+    H --> M
+    M -->|"Opção inválida"| M
+    M -->|"3 · Sair"| Z(["Fim do atendimento"])
+```
+
+Após o saque, o programa mostra o saldo atualizado e pergunta se deseja realizar uma nova transação:
+
+| Opção | Ação |
+|:---:|---|
+| **1** | Consultar saldo, sem alterar o valor disponível. |
+| **2** | Realizar novo saque, respeitando o saldo restante. |
+| **3** | Sair e encerrar o atendimento. |
+
+O menu reaparece após cada saque ou consulta. Quando o saldo chega a zero, uma tentativa de novo saque informa saldo insuficiente e retorna ao menu. O saldo volta a R$ 600,00 ao iniciar uma nova execução do programa.
+
+---
 
 ## Arquivos
 
-- `caixa_eletronico.c`: codigo principal, usando apenas `stdio.h`.
-- `caixa_eletronico.portugol.txt`: algoritmo para o Portugol WebStudio.
-- `caixa_eletronico.exe`: gerado localmente pela compilacao e ignorado pelo Git.
+| Arquivo | Descrição |
+|---|---|
+| `caixa_eletronico.c` | Código principal, usando apenas `stdio.h`. |
+| `caixa_eletronico.portugol.txt` | Algoritmo para o Portugol WebStudio. |
+| `caixa_eletronico.exe` | Gerado localmente pela compilação e ignorado pelo Git. |
+
+---
 
 ## Compilar e executar
 
-Salve os arquivos antes de compilar. No PowerShell, na pasta `ling_C`:
+> [!IMPORTANT]
+> Salve os arquivos antes de compilar.
+
+**1. Compilar** — no PowerShell, na pasta `ling_C`:
 
 ```powershell
 gcc -std=c11 -Wall -Wextra caixa_eletronico.c -o caixa_eletronico.exe
 ```
 
-Se a compilacao terminar sem erros, execute:
+**2. Executar** — se a compilação terminar sem erros:
 
 ```powershell
 .\caixa_eletronico.exe
 ```
 
-Digite um inteiro, como `123`, e pressione Enter. Nao inclua `R$` nem centavos.
-Se houver erro, informe outro valor quando solicitado. Apos o saque, o programa
-mostra o saldo atualizado e pergunta se deseja realizar uma nova transacao:
+**3. Usar** — digite um número inteiro, como `123`, e pressione Enter. Se houver erro, informe outro valor quando solicitado.
 
-- `1`: consultar saldo, sem alterar o valor disponivel.
-- `2`: realizar novo saque, respeitando o saldo restante.
-- `3`: sair e encerrar o atendimento.
+> [!TIP]
+> Não inclua `R$` nem centavos: digite só o número inteiro.
 
-O menu reaparece apos cada saque ou consulta. Quando o saldo chega a zero,
-uma tentativa de novo saque informa saldo insuficiente e retorna ao menu.
-O saldo volta a R$600,00 ao iniciar uma nova execucao do programa.
+---
 
-## Validacao e calculo
+## Validação e cálculo
 
-- Entrada com letras, decimais ou numeros extras: mensagem de entrada invalida.
-- Zero ou valor negativo: mensagem de valor invalido.
-- Valor acima do saldo atual: saldo insuficiente.
-- Em todos esses casos, a leitura se repete sem realizar o saque.
-- Valor positivo ate o saldo atual: desconta do saldo e distribui notas de
-  100, 50, 20, 10, 5 e 2 e moedas de 1.
+| Entrada | Resultado |
+|---|---|
+| Letras, decimais ou números extras | ❌ Mensagem de entrada inválida |
+| Zero ou valor negativo | ❌ Mensagem de valor inválido |
+| Valor acima do saldo atual | ❌ Saldo insuficiente |
+| Valor positivo até o saldo atual | ✅ Desconta do saldo e distribui as notas e moedas |
+| Opção de menu inválida | 🔁 Solicita novamente, sem alterar o saldo |
+
+- Nos casos de erro, a leitura se repete sem realizar o saque.
 - Somente quantidades positivas aparecem nas notas e moedas entregues.
-- Opcao de menu invalida: solicita novamente, sem alterar o saldo.
 
-O C usa `while` para repetir a leitura e `getchar` para limpar e verificar o
-restante da linha. A leitura com `%9d` limita o numero a nove caracteres para
-evitar estouro de inteiro. No uso interativo, a opcao `3` encerra o atendimento.
-Se a entrada padrao for fechada externamente, o C tambem encerra, evitando
-repeticoes sem possibilidade de receber novos dados.
+---
 
-O Portugol le uma cadeia e utiliza as bibliotecas Tipos e Texto para validar
-o formato e limitar a nove caracteres antes de converter para inteiro.
-A distribuicao e as regras de saque sao iguais nos dois algoritmos.
-O C permite espacos externos ao numero; no Portugol, digite somente o numero.
-O Portugol ainda precisa ser executado no WebStudio para validacao nesse ambiente.
+## Detalhes de implementação
+
+### C
+
+- Usa `while` para repetir a leitura e `getchar` para limpar e verificar o restante da linha.
+- A leitura com `%9d` limita o número a nove caracteres para evitar estouro de inteiro.
+- Permite espaços antes e depois do número.
+- No uso interativo, a opção `3` encerra o atendimento. Se a entrada padrão for fechada externamente, o programa também encerra, evitando repetições sem possibilidade de receber novos dados.
+
+### Portugol
+
+- Lê uma cadeia e utiliza as bibliotecas **Tipos** e **Texto** para validar o formato e limitar a nove caracteres antes de converter para inteiro.
+- Digite somente o número, sem espaços.
+
+A distribuição de notas e as regras de saque são iguais nos dois algoritmos.
+
+> [!NOTE]
+> O algoritmo em Portugol ainda precisa ser executado no WebStudio para validação nesse ambiente.
+
+---
 
 ## Testes
 
 | Entrada | Resultado |
-| --- | --- |
-| 95, depois 3 | Entrega R$95,00, mostra saldo de R$505,00 e encerra |
-| 123, 1, 2, 100, 1, 3 | Saques de R$123,00 e R$100,00; consultas mostram R$477,00 e R$377,00 |
-| 500, 2, 101, 100, 1, 3 | Recusa R$101,00 com saldo de R$100,00; aceita R$100,00 e consulta saldo zero |
-| 600, 2, 1, 3 | Saca todo o saldo; novo saque e recusado; permite consultar e sair |
-| 50, abc, 4, 1, 3 | Opcoes invalidas repetem o menu; a consulta continua mostrando R$550,00 |
+|---|---|
+| `95`, `3` | Entrega R$ 95,00, mostra saldo de R$ 505,00 e encerra. |
+| `123`, `1`, `2`, `100`, `1`, `3` | Saques de R$ 123,00 e R$ 100,00; as consultas mostram R$ 477,00 e R$ 377,00. |
+| `500`, `2`, `101`, `100`, `1`, `3` | Recusa R$ 101,00 com saldo de R$ 100,00; aceita R$ 100,00 e a consulta mostra saldo zero. |
+| `600`, `2`, `1`, `3` | Saca todo o saldo; o novo saque é recusado; permite consultar e sair. |
+| `50`, `abc`, `4`, `1`, `3` | As opções inválidas repetem o menu; a consulta continua mostrando R$ 550,00. |
 
+---
 
 ## Entrega
 
-O roteiro exige codigo C, arquivo Portugol e relatorio PDF com evidencias.
-`GRUPO_NN_codigo.c`, `GRUPO_NN_portugol.por` e `GRUPO_NN_testes.pdf`,
+O roteiro exige código C, arquivo Portugol e relatório PDF com evidências:
+
+| Item | Nome do arquivo |
+|---|---|
+| Código C | `GRUPO_NN_codigo.c` |
+| Algoritmo Portugol | `GRUPO_NN_portugol.por` |
+| Relatório de testes (PDF) | `GRUPO_NN_testes.pdf` |
