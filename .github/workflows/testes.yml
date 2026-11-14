@@ -1,0 +1,35 @@
+name: Testes
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  # Compila com avisos tratados como erro e roda os casos do README (3 rodadas)
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Rodada 1
+        run: bash testes/executar_testes.sh
+      - name: Rodada 2
+        run: bash testes/executar_testes.sh
+      - name: Rodada 3
+        run: bash testes/executar_testes.sh
+
+  # Mesmo comando do README, no PowerShell do Windows
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Compilar
+        shell: pwsh
+        run: gcc -std=c11 -Wall -Wextra -Werror caixa_eletronico.c -o caixa_eletronico.exe
+      - name: Executar o caso 95, 3
+        shell: pwsh
+        run: |
+          $saida = "95`n3`n" | .\caixa_eletronico.exe | Out-String
+          Write-Output $saida
+          if ($saida -notmatch "Saldo atual: R\$ 505,00") { exit 1 }
+          if ($saida -notmatch "Atendimento finalizado") { exit 1 }

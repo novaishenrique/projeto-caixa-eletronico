@@ -1,0 +1,4 @@
+# Executáveis gerados pela compilação
+*.exe
+*.o
+caixa_eletronico

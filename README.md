@@ -8,6 +8,8 @@
 ![GCC](https://img.shields.io/badge/GCC-compilador-333333?style=for-the-badge)
 ![Portugol](https://img.shields.io/badge/Portugol-WebStudio-2E7D32?style=for-the-badge)
 
+[![Testes](https://github.com/novaishenrique/Caixa-Eletr-nico-C/actions/workflows/testes.yml/badge.svg)](https://github.com/novaishenrique/Caixa-Eletr-nico-C/actions/workflows/testes.yml)
+
 </div>
 
 ---
@@ -72,9 +74,11 @@ O menu reaparece após cada saque ou consulta. Quando o saldo chega a zero, uma 
 
 | Arquivo | Descrição |
 |---|---|
-| `caixa_eletronico.c` | Código principal, usando apenas `stdio.h`. |
-| `caixa_eletronico.portugol.txt` | Algoritmo para o Portugol WebStudio. |
-| `caixa_eletronico.exe` | Gerado localmente pela compilação e ignorado pelo Git. |
+| [`caixa_eletronico.c`](caixa_eletronico.c) | Código principal, usando apenas `stdio.h`. |
+| [`caixa_eletronico.portugol.txt`](caixa_eletronico.portugol.txt) | Algoritmo para o Portugol WebStudio. |
+| [`testes/executar_testes.sh`](testes/executar_testes.sh) | Compila e roda os casos de teste abaixo, conferindo a saída. |
+| [`.github/workflows/testes.yml`](.github/workflows/testes.yml) | Roda os testes no GitHub a cada push (Linux, 3 rodadas, e Windows). |
+| `caixa_eletronico.exe` | Gerado localmente pela compilação e ignorado pelo Git (`.gitignore`). |
 
 ---
 
@@ -147,6 +151,23 @@ A distribuição de notas e as regras de saque são iguais nos dois algoritmos.
 | `500`, `2`, `101`, `100`, `1`, `3` | Recusa R$ 101,00 com saldo de R$ 100,00; aceita R$ 100,00 e a consulta mostra saldo zero. |
 | `600`, `2`, `1`, `3` | Saca todo o saldo; o novo saque é recusado; permite consultar e sair. |
 | `50`, `abc`, `4`, `1`, `3` | As opções inválidas repetem o menu; a consulta continua mostrando R$ 550,00. |
+
+Casos extras do script de testes:
+
+| Entrada | Resultado |
+|---|---|
+| `abc`, `12.5`, `-5`, `0`, `700`, `1234567890`, `12 3`, `  20  `, `3` | Recusa letras, decimal, negativo, zero, valor acima do saldo, número longo e números extras; aceita `20` com espaços e mostra R$ 580,00. |
+| `188`, `3` | Usa uma nota de cada valor e uma moeda. |
+| `50` e a entrada fecha | Encerra o atendimento sem repetir o menu. |
+| `95`, `1`, `3` com fim de linha do Windows | Funciona igual ao Linux. |
+
+**Rodar os testes** (Linux, macOS ou Git Bash no Windows):
+
+```bash
+bash testes/executar_testes.sh
+```
+
+O script compila com `-Wall -Wextra -Werror -pedantic` e mostra `OK` ou `FALHOU` para cada caso. Os 9 casos passaram nas 3 rodadas, e o GitHub Actions repete as 3 rodadas a cada push, além de compilar e executar no Windows com o mesmo comando do PowerShell.
 
 ---
 

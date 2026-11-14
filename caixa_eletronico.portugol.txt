@@ -1,0 +1,140 @@
+programa
+{
+	// Caixa Eletrônico — mesmo algoritmo do caixa_eletronico.c
+	// Saldo inicial de R$ 600,00; notas de 100, 50, 20, 10, 5 e 2 e moedas de 1.
+	// Digite somente o número inteiro, sem espaços, sem R$ e sem centavos.
+
+	inclua biblioteca Tipos --> tp
+	inclua biblioteca Texto --> tx
+
+	inteiro saldo = 600
+	logico entrada_valida = falso
+
+	funcao inicio()
+	{
+		inteiro opcao = 0
+		logico continuar = verdadeiro
+
+		escreva("=== CAIXA ELETRONICO ===\n")
+		realizar_saque()
+
+		enquanto (continuar)
+		{
+			escreva("\nDeseja realizar uma nova transacao?\n")
+			escreva("1 - Consultar saldo\n")
+			escreva("2 - Novo saque\n")
+			escreva("3 - Sair\n")
+			escreva("Opcao: ")
+			opcao = ler_inteiro()
+
+			se (nao entrada_valida)
+			{
+				opcao = 0
+			}
+
+			escolha (opcao)
+			{
+				caso 1:
+					escreva("Saldo atual: R$ ", saldo, ",00\n")
+					pare
+				caso 2:
+					se (saldo > 0)
+					{
+						realizar_saque()
+					}
+					senao
+					{
+						escreva("Saldo insuficiente. Seu saldo e R$ 0,00.\n")
+					}
+					pare
+				caso 3:
+					escreva("Atendimento finalizado. Obrigado por usar o caixa eletronico!\n")
+					continuar = falso
+					pare
+				caso contrario:
+					escreva("Opcao invalida. Escolha 1, 2 ou 3.\n")
+			}
+		}
+	}
+
+	// Lê uma cadeia e converte para inteiro.
+	// Aceita no máximo nove caracteres, para não estourar o inteiro.
+	// Se a entrada não for um número inteiro, entrada_valida fica falso.
+	funcao inteiro ler_inteiro()
+	{
+		cadeia entrada = ""
+		leia(entrada)
+
+		se (tx.numero_caracteres(entrada) == 0 ou tx.numero_caracteres(entrada) > 9)
+		{
+			entrada_valida = falso
+			retorne 0
+		}
+		se (nao tp.cadeia_e_inteiro(entrada, 10))
+		{
+			entrada_valida = falso
+			retorne 0
+		}
+
+		entrada_valida = verdadeiro
+		retorne tp.cadeia_para_inteiro(entrada, 10)
+	}
+
+	// Repete a leitura até receber um saque válido e então o realiza.
+	funcao realizar_saque()
+	{
+		inteiro valor = 0
+		logico sacou = falso
+
+		enquanto (nao sacou)
+		{
+			escreva("\nSaldo disponivel: R$ ", saldo, ",00\n")
+			escreva("Digite o valor do saque (somente numeros inteiros): ")
+			valor = ler_inteiro()
+
+			se (nao entrada_valida)
+			{
+				escreva("Entrada invalida. Digite apenas numeros inteiros, sem R$ e sem centavos.\n")
+			}
+			senao se (valor <= 0)
+			{
+				escreva("Valor invalido. O saque deve ser maior que zero.\n")
+			}
+			senao se (valor > saldo)
+			{
+				escreva("Saldo insuficiente. Voce pode sacar ate R$ ", saldo, ",00.\n")
+			}
+			senao
+			{
+				saldo = saldo - valor
+				escreva("\nSaque de R$ ", valor, ",00 realizado.\n")
+				entregar_cedulas(valor)
+				escreva("Saldo atual: R$ ", saldo, ",00\n")
+				sacou = verdadeiro
+			}
+		}
+	}
+
+	// Mostra as notas e moedas entregues (só as quantidades positivas).
+	funcao entregar_cedulas(inteiro valor)
+	{
+		inteiro notas[6] = {100, 50, 20, 10, 5, 2}
+		inteiro quantidade = 0
+		inteiro restante = valor
+
+		escreva("Retire o dinheiro:\n")
+		para (inteiro i = 0; i < 6; i++)
+		{
+			quantidade = restante / notas[i]
+			restante = restante % notas[i]
+			se (quantidade > 0)
+			{
+				escreva("  ", quantidade, " nota(s) de R$ ", notas[i], ",00\n")
+			}
+		}
+		se (restante > 0)
+		{
+			escreva("  ", restante, " moeda(s) de R$ 1,00\n")
+		}
+	}
+}
