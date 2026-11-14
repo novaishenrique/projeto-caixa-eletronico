@@ -6,7 +6,9 @@
 
 ### Saques com validação, saldo e troco em notas e moedas
 
-**Algoritmos e Pensamento Computacional** · Atividade 2 · Projeto introdutório em C · UNICID 2026
+**Algoritmos e Pensamento Computacional** · Prof. Carlos Eduardo Weber · 2º semestre · UNICID 2026
+
+<sub>Atividade 2 · Projeto introdutório em C</sub>
 
 [![Código C](https://img.shields.io/badge/Código-caixa__eletronico.c-2E9E4F?style=for-the-badge)](caixa_eletronico.c)
 [![Portugol](https://img.shields.io/badge/Algoritmo-Portugol-555555?style=for-the-badge)](caixa_eletronico.portugol.txt)
