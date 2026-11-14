@@ -6,6 +6,16 @@ on:
   workflow_dispatch:
 
 jobs:
+  # Confere links e imagens do README
+  readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: node --test .github/tests/*.test.js
+
   # Compila com avisos tratados como erro e roda os casos do README (3 rodadas)
   linux:
     runs-on: ubuntu-latest

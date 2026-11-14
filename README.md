@@ -1,14 +1,21 @@
 <div align="center">
 
-# 🏧 Caixa Eletrônico em C
+<img src=".github/capa.jpg" alt="Caixa Eletrônico em C: saques com validação, saldo e troco em notas e moedas" width="100%">
 
-### Atividade 2 · Projeto introdutório em C
+# Caixa Eletrônico em C
 
-![C](https://img.shields.io/badge/C11-A8B9CC?style=for-the-badge&logo=c&logoColor=white)
-![GCC](https://img.shields.io/badge/GCC-compilador-333333?style=for-the-badge)
-![Portugol](https://img.shields.io/badge/Portugol-WebStudio-2E7D32?style=for-the-badge)
+### Saques com validação, saldo e troco em notas e moedas
+
+**Algoritmos e Pensamento Computacional** · Atividade 2 · Projeto introdutório em C · UNICID 2026
+
+[![Código C](https://img.shields.io/badge/Código-caixa__eletronico.c-2E9E4F?style=for-the-badge)](caixa_eletronico.c)
+[![Portugol](https://img.shields.io/badge/Algoritmo-Portugol-555555?style=for-the-badge)](caixa_eletronico.portugol.txt)
 
 [![Testes](https://github.com/novaishenrique/projeto-caixa-eletronico/actions/workflows/testes.yml/badge.svg)](https://github.com/novaishenrique/projeto-caixa-eletronico/actions/workflows/testes.yml)
+![C](https://img.shields.io/badge/C11-A8B9CC?style=flat-square&logo=c&logoColor=black)
+![GCC](https://img.shields.io/badge/GCC-compilador-333333?style=flat-square)
+![Portugol](https://img.shields.io/badge/Portugol-WebStudio-2E7D32?style=flat-square)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
 
 </div>
 
@@ -18,8 +25,8 @@
 
 - [Sobre o projeto](#sobre-o-projeto)
 - [Como funciona](#como-funciona)
-- [Arquivos](#arquivos)
-- [Compilar e executar](#compilar-e-executar)
+- [Estrutura do repositório](#estrutura-do-repositório)
+- [Como executar](#como-executar)
 - [Validação e cálculo](#validação-e-cálculo)
 - [Detalhes de implementação](#detalhes-de-implementação)
 - [Testes](#testes)
@@ -70,19 +77,21 @@ O menu reaparece após cada saque ou consulta. Quando o saldo chega a zero, uma 
 
 ---
 
-## Arquivos
+## Estrutura do repositório
 
 | Arquivo | Descrição |
 |---|---|
 | [`caixa_eletronico.c`](caixa_eletronico.c) | Código principal, usando apenas `stdio.h`. |
 | [`caixa_eletronico.portugol.txt`](caixa_eletronico.portugol.txt) | Algoritmo para o Portugol WebStudio. |
 | [`testes/executar_testes.sh`](testes/executar_testes.sh) | Compila e roda os casos de teste abaixo, conferindo a saída. |
-| [`.github/workflows/testes.yml`](.github/workflows/testes.yml) | Roda os testes no GitHub a cada push (Linux, 3 rodadas, e Windows). |
+| [`.github/workflows/testes.yml`](.github/workflows/testes.yml) | Roda os testes no GitHub a cada push (Linux, 3 rodadas, e Windows) e confere os links do README. |
+| [`.github/tests/readme.test.js`](.github/tests/readme.test.js) | Teste dos links e imagens do README. |
+| [`.github/capa.jpg`](.github/capa.jpg) | Capa deste README. |
 | `caixa_eletronico.exe` | Gerado localmente pela compilação e ignorado pelo Git (`.gitignore`). |
 
 ---
 
-## Compilar e executar
+## Como executar
 
 > [!IMPORTANT]
 > Salve os arquivos antes de compilar.
@@ -180,3 +189,11 @@ O roteiro exige código C, arquivo Portugol e relatório PDF com evidências:
 | Código C | `GRUPO_NN_codigo.c` |
 | Algoritmo Portugol | `GRUPO_NN_portugol.por` |
 | Relatório de testes (PDF) | `GRUPO_NN_testes.pdf` |
+
+---
+
+<div align="center">
+
+<sub>Caixa Eletrônico em C · Algoritmos e Pensamento Computacional · Gestão da Tecnologia da Informação · UNICID 2026</sub>
+
+</div>
