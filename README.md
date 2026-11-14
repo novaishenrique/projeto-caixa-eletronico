@@ -8,7 +8,7 @@
 ![GCC](https://img.shields.io/badge/GCC-compilador-333333?style=for-the-badge)
 ![Portugol](https://img.shields.io/badge/Portugol-WebStudio-2E7D32?style=for-the-badge)
 
-[![Testes](https://github.com/novaishenrique/Caixa-Eletr-nico-C/actions/workflows/testes.yml/badge.svg)](https://github.com/novaishenrique/Caixa-Eletr-nico-C/actions/workflows/testes.yml)
+[![Testes](https://github.com/novaishenrique/projeto-caixa-eletronico/actions/workflows/testes.yml/badge.svg)](https://github.com/novaishenrique/projeto-caixa-eletronico/actions/workflows/testes.yml)
 
 </div>
 
